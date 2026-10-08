@@ -46,3 +46,24 @@ F(10¹⁰) 的二进制整数约 868 MiB，转成十进制后有约 2.09 GB 文�
 - 建议先运行较小规模验证环境，再尝试 10 亿、20 亿、40 亿，最后运行 100 亿。
 
 程序安装、完整命令、诊断模式和结果校验方法见[详细说明](./如何使用家用电脑计算第100亿项斐波那契数列值.md)。仓库忽略计算输出文件与诊断日志，避免把超大结果或本地运行数据加入版本控制。
+
+## MPIR 原生 C 版本（实验）
+
+项目另附 [fib_mpir.c](./fib_mpir.c)，通过 MPIR 的 GMP 兼容 mpz 接口计算 Fibonacci 数，并使用相同的两平方递推和分治十进制写盘。该版本不调用 mpz_fib_ui，因为 Windows x64 下 unsigned long 只有 32 位；输入下标由 64 位整数读取。
+
+MPIR 官方仓库目前标记的最新版本为 3.0.0。MPIR 的 Win64 头文件把 mp_size_t 定义为 64 位 long long，这使它有机会避开当前 GMP Windows 构建遇到的内部长度边界。但 MPIR 年代较早，库版本和构建选项都会影响结果；目前没有在本项目的大数负载上验证 MPIR 是否能完成 100 亿项计算，不能把它当作已验证修复。
+
+使用方法：
+
+1. 从 [MPIR 官方仓库](https://github.com/wbhart/mpir)获取源码，并按其 Windows x64 说明构建 Release 静态库。
+2. 在 Visual Studio x64 Native Tools 命令提示符中，设置头文件目录和 mpir.lib 所在目录：
+
+    set MPIR_ROOT=C:\path\to\mpir
+    set MPIR_LIB=%MPIR_ROOT%\lib\x64\Release
+    cl /O2 /W4 /I"%MPIR_ROOT%\include" fib_mpir.c /link /LIBPATH:"%MPIR_LIB%" mpir.lib
+
+3. 先用小输入核对，再运行目标任务：
+
+    fib_mpir.exe 10000000000 F_10000000000.txt
+
+目标结果约 2.09 GB。运行前确认输出盘有足够空间，并保留计算过程的内存余量。要确认 MPIR 是否解决边界问题，应在目标 Windows x64 构建上逐步增加规模，记录失败点、峰值内存和输出校验值；随后与 WSL/Linux 结果核对。
