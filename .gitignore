@@ -2,7 +2,3 @@ __pycache__/
 *.py[cod]
 *.log
 F_*.txt
-
-// Local MPIR build products
-fib_mpir.exe
-fib_mpir.obj
