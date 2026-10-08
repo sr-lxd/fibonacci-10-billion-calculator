@@ -49,22 +49,25 @@ F(10¹⁰) 的二进制整数约 868 MiB，转成十进制后有约 2.09 GB 文�
 
 ## MPIR 原生 C 版本
 
-项目提供 [fib_mpir.c](./fib_mpir.c) 和已编译的 [Windows x64 程序](./fib_mpir.exe)。程序使用 MPIR 的 GMP 兼容 mpz 接口、两平方 Fibonacci 递推和分治十进制写盘。输入下标使用 64 位整数，不调用 Win64 下参数只有 32 位的 mpz_fib_ui。
+项目提供 [fib_mpir.c](./fib_mpir.c) 和已编译的 [Windows x64 v1.1.0 程序](./fib_mpir_v1.1.0.exe)。程序使用 MPIR 的 GMP 兼容 mpz 接口、两平方 Fibonacci 递推和分治十进制写盘。输入下标使用 64 位整数，不调用 Win64 下参数只有 32 位的 mpz_fib_ui。
 
-当前预编译程序由 Visual Studio 2019 x64 编译，并静态链接 MPIR。依赖检查显示它只依赖 Windows 自带的 KERNEL32.dll；Windows x64 用户无需另装 MPIR DLL 或 VC++ 运行库。fib_mpir.obj 是编译中间文件，运行程序不需要它。
+v1.1.0 由 Visual Studio 2019 x64 编译，并静态链接 MPIR。依赖检查显示它只依赖 Windows 自带的 KERNEL32.dll；Windows x64 用户无需另装 MPIR DLL 或 VC++ 运行库。仓库保留了旧版 fib_mpir.exe（v1.0.0）；升级版使用带版本号的文件名。obj 是编译中间文件，运行程序不需要它。
 
-验证记录：F(100) = 354224848179261915075；F(20,000,000) 成功写出 4,179,753 位。Windows x64 的 MPIR 版本已完成 F(10,000,000,000)，程序报告 2,089,876,403 位。输出文件大小为 2,089,876,421 字节，文件首部为“F(10000000000) = 141352122961470”，末尾数字以 46875 结束。此次实测说明当前 MPIR 构建能够完成这项 Windows 大数计算；完整数字仍应与独立实现逐位或通过标准化后的 SHA-256 进一步核对。
+v1.1.0 增加运行提示：启动时显示版本和目标文件；大整数计算期间每 10 秒报告当前层数；十进制转换和写盘期间每 10 秒报告已处理位数及百分比；结束时显示总用时。计算层数不代表时间百分比，因为后几层的运算量更大。
+
+验证记录：v1.0.0 已完成 F(10,000,000,000)，报告 2,089,876,403 位；输出长度、开头和末尾数字与已知值相符。v1.1.0 已在同一 MPIR 库上成功编译，尚未运行计算验证。完整数字仍应与独立实现逐位或通过标准化后的 SHA-256 进一步核对。
 
 ### 直接运行
 
 在命令提示符进入程序所在目录，先运行小规模验证：
 
-    fib_mpir.exe 100 F_100.txt
+    fib_mpir_v1.1.0.exe --version
+    fib_mpir_v1.1.0.exe 100 F_100.txt
     type F_100.txt
 
 目标规模运行命令：
 
-    fib_mpir.exe 10000000000 F_10000000000.txt
+    fib_mpir_v1.1.0.exe 10000000000 F_10000000000.txt
 
 完整十进制结果约 2.09 GB。开始前确认目标磁盘至少有 3 GB 可用空间，并为运算保留足够内存。输出文件匹配 F_*.txt，已由 Git 忽略。
 
@@ -80,6 +83,6 @@ Windows 原生 Visual Studio 工程使用 [Brian Gladman 的 MPIR Windows 仓库
 
 构建后，头文件和静态库位于 MPIR 源码下的 lib\x64\Release。回到本项目目录编译：
 
-    cl /O2 /W4 /I"C:\Users\lusun\mpir-win-src\lib\x64\Release" fib_mpir.c /link /LIBPATH:"C:\Users\lusun\mpir-win-src\lib\x64\Release" mpir.lib
+    cl /O2 /W4 /I"C:\Users\lusun\mpir-win-src\lib\x64\Release" /Fofib_mpir_v1.1.0.obj fib_mpir.c /link /OUT:fib_mpir_v1.1.0.exe /LIBPATH:"C:\Users\lusun\mpir-win-src\lib\x64\Release" mpir.lib
 
 先验证 F(100)，再逐步增大 n。判断其他机器上的构建能否完成大数计算，需要按相同流程实测，并核对位数、首尾数字及独立计算结果。
