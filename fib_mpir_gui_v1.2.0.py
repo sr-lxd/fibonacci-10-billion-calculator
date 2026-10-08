@@ -32,12 +32,26 @@ def engine_path() -> Path:
     return app_directory() / ENGINE_NAME
 
 
+def icon_path() -> Path:
+    if getattr(sys, "frozen", False):
+        bundled = Path(getattr(sys, "_MEIPASS", app_directory())) / "s2.ico"
+        if bundled.exists():
+            return bundled
+    return app_directory() / "s2.ico"
+
+
 class FibonacciGui(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
         self.title(f"斐波那契计算器 v{APP_VERSION}（MPIR）")
         self.geometry("760x540")
         self.minsize(660, 480)
+        icon = icon_path()
+        if icon.is_file():
+            try:
+                self.iconbitmap(default=str(icon))
+            except tk.TclError:
+                pass
         self.output_path = tk.StringVar(value=str(app_directory() / f"F_{DEFAULT_N}.txt"))
         self.index = tk.StringVar(value=DEFAULT_N)
         self.status = tk.StringVar(value="就绪。选择下标和结果文件后开始计算。")
