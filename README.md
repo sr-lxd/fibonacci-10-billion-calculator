@@ -1,5 +1,11 @@
 # 用家用电脑计算第 100 亿项斐波那契数
 
+<!-- en-intro -->
+**Fibonacci F(10^10)** — computing the 10-billionth Fibonacci number on a home PC: 2,089,876,403 digits in 9 min 41 s on a 32 GB Windows machine (WSL2), with a full step-by-step guide.
+<!-- /en-intro -->
+
+---
+
 这个项目用 Python 计算斐波那契数列第 100 亿项，并把完整十进制结果写入文件。实测机器使用 32 GB 内存，在 Windows 11 + WSL2 Ubuntu 24.04 环境下，从计算到写盘共用时 9 分 41 秒，结果有 2,089,876,403 位。
 
 这件事的难点不只在于找到一个快速算法。快速倍增把计算压缩到几十层之后，真正决定任务能否完成的，是大整数库的实现边界、内存峰值、十进制转换和磁盘写入。对这个规模来说，算法是起点，工程才是能否跑通的关键。
