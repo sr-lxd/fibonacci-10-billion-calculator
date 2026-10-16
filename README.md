@@ -46,7 +46,7 @@
 
 F(80 亿) 的最后一层平方在所测 Windows GMP DLL 中稳定失败。错误文本显示申请 4,294,597,664 字节；全宽分配回调记录到的却是 18,446,744,073,709,181,984 字节，即 2⁶⁴−369,632。错误文本仅显示该请求的低 32 位，因此不能据此称 GMP 有 4 GiB 内存限制。
 
-脱离斐波那契递推的稀疏数单次平方、绕开 gmpy2 的直接 DLL 调用、单独编译的 C 程序，在三份 SHA-256 不同的 GMP 6.3.0 DLL（含MSYS2独立来源）中均得到相邻结果：操作数 2,147,352,576 位成功，2,147,352,577 位失败。失败时全宽分配请求为 2⁶⁴−523,232 字节。现有证据定位到所测 DLL 的超大整数平方／乘法或分配尺寸传递路径；内部 FFT 取整长度和具体源码表达式尚未找到。不等长乘法的同结果位数对照显示：输入limb数之和相差1可出现一败一成，所以该相邻平方结果不构成单纯的数学结果位数上限。MSYS2配套头文件实测limb为8字节，mp_size_t和mp_bitcnt_t为4字节；窄长度计算仍为待定位假设。WSL2/Linux GMP和Windows原生MPIR均完成目标输出，构建比较不等于操作系统单因素实验。
+脱离斐波那契递推的稀疏数单次平方、绕开 gmpy2 的直接 DLL 调用、单独编译的 C 程序，在三份 SHA-256 不同的 GMP 6.3.0 DLL（含MSYS2独立来源）中均得到相邻结果：操作数 2,147,352,576 位成功，2,147,352,577 位失败。失败时全宽分配请求为 2⁶⁴−523,232 字节。现有证据定位到所测 DLL 的超大整数平方／乘法或分配尺寸传递路径；FFT辅助函数查询与官方源码模型已解释异常请求，定位表达式为mpn_mul_fft中的N = pl * GMP_NUMB_BITS；MSYS2已补实际分配帧与指令证据。不等长乘法的同结果位数对照显示：输入limb数之和相差1可出现一败一成，所以该相邻平方结果不构成单纯的数学结果位数上限。MSYS2配套头文件实测limb为8字节，mp_size_t和mp_bitcnt_t为4字节；新台阶预测已在三份DLL验证，MSYS2实际FFT分配帧与32位指令已核对，另两份wheel的指令级检查待补。WSL2/Linux GMP和Windows原生MPIR均完成目标输出，构建比较不等于操作系统单因素实验。
 
 因此，项目让 Windows 原生界面负责交互与小规模计算，让 WSL2/Linux 负责超大规模的 GMP 运算。计算放在独立 worker 进程中。若 GMP 硬退出，界面仍能保留诊断结果，并记录每层运算、内存和失败位置。
 
@@ -112,3 +112,5 @@ Windows 原生 Visual Studio 工程使用 [Brian Gladman 的 MPIR Windows 仓库
     cl /O2 /W4 /I"C:\Users\lusun\mpir-win-src\lib\x64\Release" /Fofib_mpir_v1.1.0.obj fib_mpir.c /link /OUT:fib_mpir_v1.1.0.exe /LIBPATH:"C:\Users\lusun\mpir-win-src\lib\x64\Release" mpir.lib
 
 先验证 F(100)，再逐步增大 n。判断其他机器上的构建能否完成大数计算，需要按相同流程实测，并核对位数、首尾数字及独立计算结果。
+
+新增：[FFT阶梯与源码分析](papers/2026-10-16/evidence/Windows_GMP_FFT阶梯与源码分析_20261016.md)、[MPIR分段计时](papers/2026-10-16/evidence/mpir_profile/MPIR十亿项分段计时_20261016.md)和[上游缺陷报告待发送包](papers/2026-10-16/evidence/GMP上游报告待发送_20261016.zip)。

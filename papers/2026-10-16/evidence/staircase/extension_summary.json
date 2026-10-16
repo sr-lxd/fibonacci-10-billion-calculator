@@ -1,0 +1,434 @@
+[
+  {
+    "dll_label": "msys2",
+    "a_bits": 2149449665,
+    "b_bits": 2149449665,
+    "mode": "multiply",
+    "exit_code": 3,
+    "guard": null,
+    "elapsed_s": 9.602493799990043,
+    "peak_wset_bytes": 1760980992,
+    "min_available_bytes": 20155199488,
+    "events": [
+      {
+        "event": "before_mul",
+        "a_bits": 2149449665,
+        "b_bits": 2149449665,
+        "same_pointer": false,
+        "a_limbs": 33585152,
+        "b_limbs": 33585152,
+        "expected_result_bits": 4298899329
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028384,
+        "signed64": -523232,
+        "low32": 4294444064
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028384,
+        "signed64": -523232,
+        "low32": 4294444064
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4294444064)\n",
+    "input_limb_sum": 67170304,
+    "request_signed64": -523232,
+    "source_model": {
+      "input_limb_sum": 67170304,
+      "queried_rn": 67170304,
+      "model_pl": 33585152,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149449728,
+      "model_N_signed32": -2145517568,
+      "model_M": -1047616,
+      "model_Nprime": -2093056,
+      "model_nprime": -32704,
+      "model_request_signed64": -523232
+    },
+    "prediction_matches": true
+  },
+  {
+    "dll_label": "msys2",
+    "a_bits": 2149449665,
+    "b_bits": 2149449729,
+    "mode": "multiply",
+    "exit_code": 3,
+    "guard": null,
+    "elapsed_s": 7.558189200004563,
+    "peak_wset_bytes": 1768497152,
+    "min_available_bytes": 20163256320,
+    "events": [
+      {
+        "event": "before_mul",
+        "a_bits": 2149449665,
+        "b_bits": 2149449729,
+        "same_pointer": false,
+        "a_limbs": 33585152,
+        "b_limbs": 33585153,
+        "expected_result_bits": 4298899393
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4294444576)\n",
+    "input_limb_sum": 67170305,
+    "request_signed64": -522720,
+    "source_model": {
+      "input_limb_sum": 67170305,
+      "queried_rn": 67174400,
+      "model_pl": 33587200,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149580800,
+      "model_N_signed32": -2145386496,
+      "model_M": -1047552,
+      "model_Nprime": -2091008,
+      "model_nprime": -32672,
+      "model_request_signed64": -522720
+    },
+    "prediction_matches": true
+  },
+  {
+    "dll_label": "msys2",
+    "a_bits": 2149580737,
+    "b_bits": 2149580737,
+    "mode": "multiply",
+    "exit_code": 3,
+    "guard": null,
+    "elapsed_s": 7.605679600033909,
+    "peak_wset_bytes": 1768521728,
+    "min_available_bytes": 20140425216,
+    "events": [
+      {
+        "event": "before_mul",
+        "a_bits": 2149580737,
+        "b_bits": 2149580737,
+        "same_pointer": false,
+        "a_limbs": 33587200,
+        "b_limbs": 33587200,
+        "expected_result_bits": 4299161473
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4294444576)\n",
+    "input_limb_sum": 67174400,
+    "request_signed64": -522720,
+    "source_model": {
+      "input_limb_sum": 67174400,
+      "queried_rn": 67174400,
+      "model_pl": 33587200,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149580800,
+      "model_N_signed32": -2145386496,
+      "model_M": -1047552,
+      "model_Nprime": -2091008,
+      "model_nprime": -32672,
+      "model_request_signed64": -522720
+    },
+    "prediction_matches": true
+  },
+  {
+    "dll_label": "msys2",
+    "a_bits": 2149580737,
+    "b_bits": 2149580801,
+    "mode": "multiply",
+    "exit_code": 3,
+    "guard": null,
+    "elapsed_s": 9.540092199924402,
+    "peak_wset_bytes": 1760817152,
+    "min_available_bytes": 20173291520,
+    "events": [
+      {
+        "event": "before_mul",
+        "a_bits": 2149580737,
+        "b_bits": 2149580801,
+        "same_pointer": false,
+        "a_limbs": 33587200,
+        "b_limbs": 33587201,
+        "expected_result_bits": 4299161537
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4294444576)\n",
+    "input_limb_sum": 67174401,
+    "request_signed64": -522720,
+    "source_model": {
+      "input_limb_sum": 67174401,
+      "queried_rn": 67178496,
+      "model_pl": 33589248,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149711872,
+      "model_N_signed32": -2145255424,
+      "model_M": -1047488,
+      "model_Nprime": -2091008,
+      "model_nprime": -32672,
+      "model_request_signed64": -522720
+    },
+    "prediction_matches": true
+  },
+  {
+    "dll_label": "wheel231",
+    "a_bits": 2149449665,
+    "b_bits": 2149449665,
+    "mode": "multiply",
+    "exit_code": 3221226505,
+    "guard": null,
+    "elapsed_s": 9.76625139999669,
+    "peak_wset_bytes": 1760739328,
+    "min_available_bytes": 20177866752,
+    "events": [
+      {
+        "event": "before_mul",
+        "a_bits": 2149449665,
+        "b_bits": 2149449665,
+        "same_pointer": false,
+        "a_limbs": 33585152,
+        "b_limbs": 33585152,
+        "expected_result_bits": 4298899329
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028384,
+        "signed64": -523232,
+        "low32": 4294444064
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028384,
+        "signed64": -523232,
+        "low32": 4294444064
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4294444064)\n",
+    "input_limb_sum": 67170304,
+    "request_signed64": -523232,
+    "source_model": {
+      "input_limb_sum": 67170304,
+      "queried_rn": 67170304,
+      "model_pl": 33585152,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149449728,
+      "model_N_signed32": -2145517568,
+      "model_M": -1047616,
+      "model_Nprime": -2093056,
+      "model_nprime": -32704,
+      "model_request_signed64": -523232
+    },
+    "prediction_matches": true
+  },
+  {
+    "dll_label": "wheel231",
+    "a_bits": 2149449665,
+    "b_bits": 2149449729,
+    "mode": "multiply",
+    "exit_code": 3221226505,
+    "guard": null,
+    "elapsed_s": 8.050736299948767,
+    "peak_wset_bytes": 1768333312,
+    "min_available_bytes": 20151795712,
+    "events": [
+      {
+        "event": "before_mul",
+        "a_bits": 2149449665,
+        "b_bits": 2149449729,
+        "same_pointer": false,
+        "a_limbs": 33585152,
+        "b_limbs": 33585153,
+        "expected_result_bits": 4298899393
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4294444576)\n",
+    "input_limb_sum": 67170305,
+    "request_signed64": -522720,
+    "source_model": {
+      "input_limb_sum": 67170305,
+      "queried_rn": 67174400,
+      "model_pl": 33587200,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149580800,
+      "model_N_signed32": -2145386496,
+      "model_M": -1047552,
+      "model_Nprime": -2091008,
+      "model_nprime": -32672,
+      "model_request_signed64": -522720
+    },
+    "prediction_matches": true
+  },
+  {
+    "dll_label": "wheel221",
+    "a_bits": 2149449665,
+    "b_bits": 2149449665,
+    "mode": "multiply",
+    "exit_code": 3221226505,
+    "guard": null,
+    "elapsed_s": 9.85246590001043,
+    "peak_wset_bytes": 1760759808,
+    "min_available_bytes": 20187353088,
+    "events": [
+      {
+        "event": "before_mul",
+        "a_bits": 2149449665,
+        "b_bits": 2149449665,
+        "same_pointer": false,
+        "a_limbs": 33585152,
+        "b_limbs": 33585152,
+        "expected_result_bits": 4298899329
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028384,
+        "signed64": -523232,
+        "low32": 4294444064
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028384,
+        "signed64": -523232,
+        "low32": 4294444064
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4294444064)\n",
+    "input_limb_sum": 67170304,
+    "request_signed64": -523232,
+    "source_model": {
+      "input_limb_sum": 67170304,
+      "queried_rn": 67170304,
+      "model_pl": 33585152,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149449728,
+      "model_N_signed32": -2145517568,
+      "model_M": -1047616,
+      "model_Nprime": -2093056,
+      "model_nprime": -32704,
+      "model_request_signed64": -523232
+    },
+    "prediction_matches": true
+  },
+  {
+    "dll_label": "wheel221",
+    "a_bits": 2149449665,
+    "b_bits": 2149449729,
+    "mode": "multiply",
+    "exit_code": 3221226505,
+    "guard": null,
+    "elapsed_s": 7.976982700056396,
+    "peak_wset_bytes": 1768304640,
+    "min_available_bytes": 20183334912,
+    "events": [
+      {
+        "event": "before_mul",
+        "a_bits": 2149449665,
+        "b_bits": 2149449729,
+        "same_pointer": false,
+        "a_limbs": 33585152,
+        "b_limbs": 33585153,
+        "expected_result_bits": 4298899393
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028896,
+        "signed64": -522720,
+        "low32": 4294444576
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4294444576)\n",
+    "input_limb_sum": 67170305,
+    "request_signed64": -522720,
+    "source_model": {
+      "input_limb_sum": 67170305,
+      "queried_rn": 67174400,
+      "model_pl": 33587200,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149580800,
+      "model_N_signed32": -2145386496,
+      "model_M": -1047552,
+      "model_Nprime": -2091008,
+      "model_nprime": -32672,
+      "model_request_signed64": -522720
+    },
+    "prediction_matches": true
+  }
+]

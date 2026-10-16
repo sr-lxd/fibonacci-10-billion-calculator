@@ -1,0 +1,138 @@
+{
+  "scope": "MSYS2 helper queries plus source arithmetic model, not internal execution values",
+  "signed_overflow": "Explicit two-complement emulation; signed C overflow is undefined behavior",
+  "rows": [
+    {
+      "input_limb_sum": 67104768,
+      "queried_rn": 67104768,
+      "model_pl": 33552384,
+      "queried_k": 11,
+      "exact_pl_times_64": 2147352576,
+      "model_N_signed32": 2147352576,
+      "model_M": 1048512,
+      "model_Nprime": 2097152,
+      "model_nprime": 32768,
+      "model_request_signed64": 524320
+    },
+    {
+      "input_limb_sum": 67104769,
+      "queried_rn": 67108864,
+      "model_pl": 33554432,
+      "queried_k": 11,
+      "exact_pl_times_64": 2147483648,
+      "model_N_signed32": -2147483648,
+      "model_M": -1048576,
+      "model_Nprime": -2093056,
+      "model_nprime": -32704,
+      "model_request_signed64": -523232
+    },
+    {
+      "input_limb_sum": 67108864,
+      "queried_rn": 67108864,
+      "model_pl": 33554432,
+      "queried_k": 11,
+      "exact_pl_times_64": 2147483648,
+      "model_N_signed32": -2147483648,
+      "model_M": -1048576,
+      "model_Nprime": -2093056,
+      "model_nprime": -32704,
+      "model_request_signed64": -523232
+    },
+    {
+      "input_limb_sum": 67108865,
+      "queried_rn": 67112960,
+      "model_pl": 33556480,
+      "queried_k": 11,
+      "exact_pl_times_64": 2147614720,
+      "model_N_signed32": -2147352576,
+      "model_M": -1048512,
+      "model_Nprime": -2093056,
+      "model_nprime": -32704,
+      "model_request_signed64": -523232
+    },
+    {
+      "input_limb_sum": 67121152,
+      "queried_rn": 67121152,
+      "model_pl": 33560576,
+      "queried_k": 11,
+      "exact_pl_times_64": 2147876864,
+      "model_N_signed32": -2147090432,
+      "model_M": -1048384,
+      "model_Nprime": -2093056,
+      "model_nprime": -32704,
+      "model_request_signed64": -523232
+    },
+    {
+      "input_limb_sum": 67166208,
+      "queried_rn": 67166208,
+      "model_pl": 33583104,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149318656,
+      "model_N_signed32": -2145648640,
+      "model_M": -1047680,
+      "model_Nprime": -2093056,
+      "model_nprime": -32704,
+      "model_request_signed64": -523232
+    },
+    {
+      "input_limb_sum": 67170304,
+      "queried_rn": 67170304,
+      "model_pl": 33585152,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149449728,
+      "model_N_signed32": -2145517568,
+      "model_M": -1047616,
+      "model_Nprime": -2093056,
+      "model_nprime": -32704,
+      "model_request_signed64": -523232
+    },
+    {
+      "input_limb_sum": 67170305,
+      "queried_rn": 67174400,
+      "model_pl": 33587200,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149580800,
+      "model_N_signed32": -2145386496,
+      "model_M": -1047552,
+      "model_Nprime": -2091008,
+      "model_nprime": -32672,
+      "model_request_signed64": -522720
+    },
+    {
+      "input_limb_sum": 67174400,
+      "queried_rn": 67174400,
+      "model_pl": 33587200,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149580800,
+      "model_N_signed32": -2145386496,
+      "model_M": -1047552,
+      "model_Nprime": -2091008,
+      "model_nprime": -32672,
+      "model_request_signed64": -522720
+    },
+    {
+      "input_limb_sum": 67174401,
+      "queried_rn": 67178496,
+      "model_pl": 33589248,
+      "queried_k": 11,
+      "exact_pl_times_64": 2149711872,
+      "model_N_signed32": -2145255424,
+      "model_M": -1047488,
+      "model_Nprime": -2091008,
+      "model_nprime": -32672,
+      "model_request_signed64": -522720
+    },
+    {
+      "input_limb_sum": 86780240,
+      "queried_rn": 86781952,
+      "model_pl": 43390976,
+      "queried_k": 11,
+      "exact_pl_times_64": 2777022464,
+      "model_N_signed32": -1517944832,
+      "model_M": -741184,
+      "model_Nprime": -1478656,
+      "model_nprime": -23104,
+      "model_request_signed64": -369632
+    }
+  ]
+}

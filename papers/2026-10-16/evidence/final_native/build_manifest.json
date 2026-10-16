@@ -1,0 +1,5 @@
+{
+  "source_sha256": "0595760eaf67a782847bebc9ef25c3631c0495ff7512a9ad97f11e39099b29c6",
+  "exe_sha256": "0896d8fd3b6ce3db1d04c3caa1e906c7da27bf9fd26e7f6dad1df0605421a4e4",
+  "changes": "stack capture only at abnormal full-width allocation; chunked shift construction above ULONG_MAX; popcount and size verification after successful multiplication"
+}

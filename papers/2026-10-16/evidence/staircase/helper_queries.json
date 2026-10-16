@@ -1,0 +1,194 @@
+[
+  {
+    "input_limb_sum": 67104768,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67104768,
+    "next_size_bits": 4294705152,
+    "as_int32": -262144
+  },
+  {
+    "input_limb_sum": 67104768,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67104768,
+    "next_size_bits": 4294705152,
+    "as_int32": -262144
+  },
+  {
+    "input_limb_sum": 67104769,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67106816,
+    "next_size_bits": 4294836224,
+    "as_int32": -131072
+  },
+  {
+    "input_limb_sum": 67104769,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67106816,
+    "next_size_bits": 4294836224,
+    "as_int32": -131072
+  },
+  {
+    "input_limb_sum": 67106816,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67106816,
+    "next_size_bits": 4294836224,
+    "as_int32": -131072
+  },
+  {
+    "input_limb_sum": 67106816,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67106816,
+    "next_size_bits": 4294836224,
+    "as_int32": -131072
+  },
+  {
+    "input_limb_sum": 67108863,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67108864,
+    "next_size_bits": 4294967296,
+    "as_int32": 0
+  },
+  {
+    "input_limb_sum": 67108863,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67108864,
+    "next_size_bits": 4294967296,
+    "as_int32": 0
+  },
+  {
+    "input_limb_sum": 67108864,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67108864,
+    "next_size_bits": 4294967296,
+    "as_int32": 0
+  },
+  {
+    "input_limb_sum": 67108864,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67108864,
+    "next_size_bits": 4294967296,
+    "as_int32": 0
+  },
+  {
+    "input_limb_sum": 67108865,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67110912,
+    "next_size_bits": 4295098368,
+    "as_int32": 131072
+  },
+  {
+    "input_limb_sum": 67108865,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67110912,
+    "next_size_bits": 4295098368,
+    "as_int32": 131072
+  },
+  {
+    "input_limb_sum": 67110912,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67110912,
+    "next_size_bits": 4295098368,
+    "as_int32": 131072
+  },
+  {
+    "input_limb_sum": 67110912,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67110912,
+    "next_size_bits": 4295098368,
+    "as_int32": 131072
+  },
+  {
+    "input_limb_sum": 67112960,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67112960,
+    "next_size_bits": 4295229440,
+    "as_int32": 262144
+  },
+  {
+    "input_limb_sum": 67112960,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67112960,
+    "next_size_bits": 4295229440,
+    "as_int32": 262144
+  },
+  {
+    "input_limb_sum": 67112961,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67115008,
+    "next_size_bits": 4295360512,
+    "as_int32": 393216
+  },
+  {
+    "input_limb_sum": 67112961,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67115008,
+    "next_size_bits": 4295360512,
+    "as_int32": 393216
+  },
+  {
+    "input_limb_sum": 67117056,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67117056,
+    "next_size_bits": 4295491584,
+    "as_int32": 524288
+  },
+  {
+    "input_limb_sum": 67117056,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67117056,
+    "next_size_bits": 4295491584,
+    "as_int32": 524288
+  },
+  {
+    "input_limb_sum": 67117057,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67119104,
+    "next_size_bits": 4295622656,
+    "as_int32": 655360
+  },
+  {
+    "input_limb_sum": 67117057,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67119104,
+    "next_size_bits": 4295622656,
+    "as_int32": 655360
+  },
+  {
+    "input_limb_sum": 67121152,
+    "square_flag": 0,
+    "k": 11,
+    "next_size": 67121152,
+    "next_size_bits": 4295753728,
+    "as_int32": 786432
+  },
+  {
+    "input_limb_sum": 67121152,
+    "square_flag": 1,
+    "k": 11,
+    "next_size": 67121152,
+    "next_size_bits": 4295753728,
+    "as_int32": 786432
+  }
+]

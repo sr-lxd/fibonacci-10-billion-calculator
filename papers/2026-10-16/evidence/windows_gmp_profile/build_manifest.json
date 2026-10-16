@@ -1,0 +1,11 @@
+{
+  "same_code_except_include": true,
+  "mpir_profile_source_sha256": "a1501406c8396bfbc4ce90cfa9823926154b323a8b8c8fe7a69a703a80738eec",
+  "gmp_profile_source_sha256": "c3f4af4465d51db0ece47ac53e43c36386b8b11a242d4a697f5b2281f9ca4b40",
+  "exe_sha256": "8d580b76e3778110d7e4aaf0cbc6f487bf610b8fae2b4cd8b65c6cf6c53c7606",
+  "dll_sha256": "37248cda33845e7c5c35a574e57da762dd0a8268f0270d179f30a33746809681",
+  "header_sha256": "178db66910305eed62d2d3fdd1f203a45febaa2aaa64690b608c7d95f2a1a3cc",
+  "compiler": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat",
+  "flags": "/utf-8 /O2 /W4 x64; same as MPIR profile",
+  "changed_factors": "GMP header and shared DLL replace MPIR header and static library; OS, compiler, C code and output destination retained"
+}

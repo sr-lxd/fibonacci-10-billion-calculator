@@ -1,0 +1,8 @@
+{
+  "prediction_sha256": "1fe694460418a3fa085bf5f50aa5a2296190bcbd17ff0f14c1491cdf2b427358",
+  "prediction_mtime_utc": "2026-10-16T05:02:40.370418+00:00",
+  "prediction_birthtime_utc": "2026-10-16T05:02:40.370418+00:00",
+  "first_case_stdout_birthtime_utc": "2026-10-16T05:02:40.377456+00:00",
+  "source": "NTFS local file metadata, recorded after the runs; not an externally timestamped registration",
+  "order_verified": true
+}

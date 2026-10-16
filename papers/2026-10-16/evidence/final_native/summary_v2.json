@@ -1,0 +1,283 @@
+[
+  {
+    "dll_label": "msys2_v2",
+    "a_bits": 1000,
+    "b_bits": 1000,
+    "mode": "square",
+    "exit_code": 0,
+    "guard": null,
+    "elapsed_s": 0.1057932999683544,
+    "peak_wset_bytes": 2543616,
+    "min_available_bytes": 17948311552,
+    "events": [
+      {
+        "event": "symbol",
+        "name": "__gmpn_mul_fft",
+        "rva": 262448
+      },
+      {
+        "event": "symbol",
+        "name": "__gmp_tmp_reentrant_alloc",
+        "rva": 8288
+      },
+      {
+        "event": "symbol",
+        "name": "__gmpn_mulmod_bnm1",
+        "rva": 400912
+      },
+      {
+        "event": "symbol",
+        "name": "__gmpn_nussbaumer_mul",
+        "rva": 264768
+      },
+      {
+        "event": "before_mul",
+        "a_bits": 1000,
+        "b_bits": 1000,
+        "same_pointer": true,
+        "a_limbs": 16,
+        "b_limbs": 16,
+        "expected_result_bits": 1999
+      },
+      {
+        "event": "after_mul",
+        "result_limbs": 32,
+        "result_bits": 1999
+      },
+      {
+        "event": "sparse_validation",
+        "popcount": 1,
+        "bits": 1999,
+        "correct": true
+      }
+    ],
+    "wrapped_requests": [],
+    "stderr": ""
+  },
+  {
+    "dll_label": "msys2_v2",
+    "a_bits": 2147352577,
+    "b_bits": 2147352577,
+    "mode": "square",
+    "exit_code": 3,
+    "guard": null,
+    "elapsed_s": 6.25648270000238,
+    "peak_wset_bytes": 1222082560,
+    "min_available_bytes": 17017614336,
+    "events": [
+      {
+        "event": "symbol",
+        "name": "__gmpn_mul_fft",
+        "rva": 262448
+      },
+      {
+        "event": "symbol",
+        "name": "__gmp_tmp_reentrant_alloc",
+        "rva": 8288
+      },
+      {
+        "event": "symbol",
+        "name": "__gmpn_mulmod_bnm1",
+        "rva": 400912
+      },
+      {
+        "event": "symbol",
+        "name": "__gmpn_nussbaumer_mul",
+        "rva": 264768
+      },
+      {
+        "event": "before_mul",
+        "a_bits": 2147352577,
+        "b_bits": 2147352577,
+        "same_pointer": true,
+        "a_limbs": 33552385,
+        "b_limbs": 33552385,
+        "expected_result_bits": 4294705153
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028384,
+        "signed64": -523232,
+        "low32": 4294444064
+      },
+      {
+        "event": "fft_unwound_registers",
+        "rip_rva": 262942,
+        "pl_r12d": 33554432,
+        "nprime_r13d": -32704,
+        "Nprime_ebx": -2093056,
+        "k_esi": 11
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 2,
+        "rva": 8313,
+        "begin_rva": 8288
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 3,
+        "rva": 262942,
+        "begin_rva": 262448
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 4,
+        "rva": 404679,
+        "begin_rva": 403648
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 5,
+        "rva": 264939,
+        "begin_rva": 264768
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 6,
+        "rva": 264707,
+        "begin_rva": 264208
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 7,
+        "rva": 76837,
+        "begin_rva": 76560
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073709028384,
+        "signed64": -523232,
+        "low32": 4294444064
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4294444064)\n"
+  },
+  {
+    "dll_label": "msys2_v2",
+    "a_bits": 4294967297,
+    "b_bits": 4294967297,
+    "mode": "square",
+    "exit_code": 3,
+    "guard": null,
+    "elapsed_s": 6.906099999905564,
+    "peak_wset_bytes": 1754996736,
+    "min_available_bytes": 16548847616,
+    "events": [
+      {
+        "event": "symbol",
+        "name": "__gmpn_mul_fft",
+        "rva": 262448
+      },
+      {
+        "event": "symbol",
+        "name": "__gmp_tmp_reentrant_alloc",
+        "rva": 8288
+      },
+      {
+        "event": "symbol",
+        "name": "__gmpn_mulmod_bnm1",
+        "rva": 400912
+      },
+      {
+        "event": "symbol",
+        "name": "__gmpn_nussbaumer_mul",
+        "rva": 264768
+      },
+      {
+        "event": "before_mul",
+        "a_bits": 4294967297,
+        "b_bits": 4294967297,
+        "same_pointer": true,
+        "a_limbs": 67108865,
+        "b_limbs": 67108865,
+        "expected_result_bits": 8589934593
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 1073741840,
+        "signed64": 1073741840,
+        "low32": 1073741840
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 1073774632,
+        "signed64": 1073774632,
+        "low32": 1073774632
+      },
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073708503584,
+        "signed64": -1048032,
+        "low32": 4293919264
+      },
+      {
+        "event": "fft_unwound_registers",
+        "rip_rva": 262942,
+        "pl_r12d": 33555456,
+        "nprime_r13d": -65504,
+        "Nprime_ebx": -4192256,
+        "k_esi": 10
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 2,
+        "rva": 8313,
+        "begin_rva": 8288
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 3,
+        "rva": 262942,
+        "begin_rva": 262448
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 4,
+        "rva": 404679,
+        "begin_rva": 403648
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 5,
+        "rva": 404709,
+        "begin_rva": 403648
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 6,
+        "rva": 264939,
+        "begin_rva": 264768
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 7,
+        "rva": 264707,
+        "begin_rva": 264208
+      },
+      {
+        "event": "gmp_stack_frame",
+        "index": 8,
+        "rva": 76837,
+        "begin_rva": 76560
+      }
+    ],
+    "wrapped_requests": [
+      {
+        "event": "allocation",
+        "kind": "allocate",
+        "size_t_bytes": 18446744073708503584,
+        "signed64": -1048032,
+        "low32": 4293919264
+      }
+    ],
+    "stderr": "GNU MP: Cannot allocate memory (size=4293919264)\n"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "cases": [
+    [
+      1000,
+      1000,
+      "square"
+    ],
+    [
+      2147352577,
+      2147352577,
+      "square"
+    ],
+    [
+      4294967297,
+      4294967297,
+      "square"
+    ]
+  ],
+  "guards": "existing 120-second timeout and 6GiB available-physical-memory guard",
+  "positive_wrap_test": "one sparse square, isolated process; no claim of silent error unless a returned result fails validation"
+}

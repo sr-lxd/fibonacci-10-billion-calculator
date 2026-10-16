@@ -1,0 +1,9 @@
+{
+  "retained_source_sha256": "1fd5f0724415ecae60968385e5472026e44a678d52d3f720a1cc6aa517e1438e",
+  "profile_source_sha256": "a1501406c8396bfbc4ce90cfa9823926154b323a8b8c8fe7a69a703a80738eec",
+  "exe_sha256": "0962d74ed629264f679dbfbf7786bbb71609fc13dd5467e932d171235001a904",
+  "static_library_sha256": "450eb5fa002a6191185b071d6750ce28790821335994f748b5d3a8b416e68b06",
+  "compiler": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat",
+  "flags": "/utf-8 /O2 /W4 x64",
+  "scope": "new instrumented retained-source build; recurrence, writer operations and leaf size unchanged; not a binary-matched release rebuild"
+}

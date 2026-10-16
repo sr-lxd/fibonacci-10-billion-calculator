@@ -1,0 +1,103 @@
+{
+  "windows_gmp_medians": {
+    "arithmetic_s": 6.1687204,
+    "width_correction_s": 2.0574555,
+    "writer_total_s": 42.9206952,
+    "writer_pow10_s": 1.7958914,
+    "writer_division_s": 24.712613,
+    "writer_get_str_s": 16.3171764,
+    "writer_padding_fwrite_s": 0.0461408,
+    "fclose_s": 0.0001226,
+    "process_wall_s": 51.1390222000191,
+    "writer_other_s": 0.07811809999999753
+  },
+  "windows_mpir_medians": {
+    "arithmetic_s": 11.2434206,
+    "width_correction_s": 3.5249796,
+    "writer_total_s": 179.6207615,
+    "writer_pow10_s": 3.2844493,
+    "writer_division_s": 111.6733457,
+    "writer_get_str_s": 64.7296727,
+    "writer_padding_fwrite_s": 0.0483307,
+    "fclose_s": 0.00013,
+    "process_wall_s": 194.40933930000756,
+    "writer_other_s": 0.08140169999998648
+  },
+  "MPIR_to_GMP_writer_ratio": 4.184945296505822,
+  "prediction_receipt": {
+    "prediction_sha256": "1fe694460418a3fa085bf5f50aa5a2296190bcbd17ff0f14c1491cdf2b427358",
+    "prediction_mtime_utc": "2026-10-16T05:02:40.370418+00:00",
+    "prediction_birthtime_utc": "2026-10-16T05:02:40.370418+00:00",
+    "first_case_stdout_birthtime_utc": "2026-10-16T05:02:40.377456+00:00",
+    "source": "NTFS local file metadata, recorded after the runs; not an externally timestamped registration",
+    "order_verified": true
+  },
+  "source_model": {
+    "67104769": {
+      "s": 67104769,
+      "k": 11,
+      "h": 33552385,
+      "pl": 33554432,
+      "exact_bits": 2147483648,
+      "N": -2147483648,
+      "M": -1048576,
+      "W": 2048,
+      "Nprime": -2093056,
+      "nprime": -32704,
+      "negative_path": true,
+      "request_u64": 18446744073709028384,
+      "request_i64": -523232
+    },
+    "67170305": {
+      "s": 67170305,
+      "k": 11,
+      "h": 33585153,
+      "pl": 33587200,
+      "exact_bits": 2149580800,
+      "N": -2145386496,
+      "M": -1047552,
+      "W": 2048,
+      "Nprime": -2091008,
+      "nprime": -32672,
+      "negative_path": true,
+      "request_u64": 18446744073709028896,
+      "request_i64": -522720
+    },
+    "86780240": {
+      "s": 86780240,
+      "k": 11,
+      "h": 43390120,
+      "pl": 43390976,
+      "exact_bits": 2777022464,
+      "N": -1517944832,
+      "M": -741184,
+      "W": 2048,
+      "Nprime": -1478656,
+      "nprime": -23104,
+      "negative_path": true,
+      "request_u64": 18446744073709181984,
+      "request_i64": -369632
+    }
+  },
+  "unwound_frame": {
+    "event": "fft_unwound_registers",
+    "rip_rva": 262942,
+    "pl_r12d": 33554432,
+    "nprime_r13d": -32704,
+    "Nprime_ebx": -2093056,
+    "k_esi": 11
+  },
+  "large_sparse_case": {
+    "operand_bits": 4294967297,
+    "exit_code": 3,
+    "guard": null,
+    "returned_result": false,
+    "abnormal_request": {
+      "event": "allocation",
+      "kind": "allocate",
+      "size_t_bytes": 18446744073708503584,
+      "signed64": -1048032,
+      "low32": 4293919264
+    }
+  }
+}

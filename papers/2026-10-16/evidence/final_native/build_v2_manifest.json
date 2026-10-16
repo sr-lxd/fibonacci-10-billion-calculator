@@ -1,0 +1,5 @@
+{
+  "source_sha256": "8823f31d551d9aeb0825b804865430d671c941d18bd077956024eccc5eeb722f",
+  "exe_sha256": "ab77df28f929b535b2a5274035c28f73c120d00cec67af490eb923c771898561",
+  "changes": "stack and nonvolatile-register unwind at abnormal allocation; large sparse mpz created with GMP allocator and explicit canonical limbs after public-shift construction failed before multiplication; popcount/size verification if multiplication returns"
+}

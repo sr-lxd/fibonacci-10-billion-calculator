@@ -1,0 +1,20 @@
+{
+  "L": 67104768,
+  "sizes": [
+    67104768,
+    67104769,
+    67106816,
+    67108863,
+    67108864,
+    67108865,
+    67110912,
+    67112960,
+    67112961,
+    67117056,
+    67117057,
+    67121152
+  ],
+  "prediction": "un+vn>L fails; signed request plateaus may change after 2^26 limbs; test actual requests before attributing to FFT",
+  "probe_sha256": "95b5ae23ef0672e4b4249d5798ed6a32c0c7a0c0d52d4ecfefb30ef306de7885",
+  "helper_scope": "MSYS2 matching-header ABI; helper calls are not an internal execution trace"
+}
