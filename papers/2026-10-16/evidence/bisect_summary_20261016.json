@@ -1,0 +1,10 @@
+{
+  "last_success_bits": 2147352576,
+  "first_failure_bits": 2147352577,
+  "direct_last_success": "success",
+  "direct_first_failure": "wrapped_request_failure",
+  "result_bits_at_first_failure": 4294705153,
+  "result_limbs_64bit": 67104769,
+  "fft_rounding_length": null,
+  "caveat": "Observed adjacent pair under a binary-search monotonicity assumption; native FFT length not measured."
+}

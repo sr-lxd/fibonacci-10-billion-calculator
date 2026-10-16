@@ -1,0 +1,39 @@
+{
+  "file": "C:\\Users\\lusun\\fib_publication_work\\experiments_20261015\\linux_native_10b_reference\\output.txt",
+  "n": 10000000000,
+  "digit_count": 2089876403,
+  "decimal_mod_9": 6,
+  "decimal_mod_11": 0,
+  "expected_mod_9": 6,
+  "expected_mod_11": 0,
+  "digit_sum": 9404519964,
+  "alternating_sum": -36256,
+  "cassini_prime_checks": {
+    "1000000007": {
+      "F_n": 815449418,
+      "F_n_minus_1": 107920472,
+      "F_n_plus_1": 923369890,
+      "lhs": 1,
+      "rhs": 1
+    },
+    "1000000009": {
+      "F_n": 862282876,
+      "F_n_minus_1": 32142348,
+      "F_n_plus_1": 894425224,
+      "lhs": 1,
+      "rhs": 1
+    },
+    "2147483647": {
+      "F_n": 1948965828,
+      "F_n_minus_1": 1203311477,
+      "F_n_plus_1": 1004793658,
+      "lhs": 1,
+      "rhs": 1
+    }
+  },
+  "pisano_period_mod_100000": 1500000,
+  "last5": "46875",
+  "leading5": "14135",
+  "log10_fraction_80_digit_context": "0.15030233552471148998242361558683891256620447612392988462931858406030005791487079",
+  "log10_digit_count": 2089876403
+}

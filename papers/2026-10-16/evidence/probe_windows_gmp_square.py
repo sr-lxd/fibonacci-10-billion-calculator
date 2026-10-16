@@ -18,7 +18,8 @@ import time
 
 import psutil
 
-ROOT = Path(__file__).resolve().parent / "experiments_20261016" / "isolated_square"
+ROOT = Path(os.environ.get("FIB_GMP_PROBE_ROOT",
+                           Path(__file__).resolve().parent / "experiments_20261016" / "isolated_square"))
 
 
 def child(case: Path, bits: int) -> None:
