@@ -1,0 +1,32 @@
+{
+  "msys2": {
+    "header_sha256": "178db66910305eed62d2d3fdd1f203a45febaa2aaa64690b608c7d95f2a1a3cc",
+    "source_sha256": "708c73a9f8ec63f828578b41b25b375ea3a6d281831eb5760a7aaea3b76114b3",
+    "exe_sha256": "498b33098bf9c07ef634bc9c6ba2850ad6c78873c346d00a977a1b3a01a277eb",
+    "widths": {
+      "limb_bytes": 8,
+      "mp_size_bytes": 4,
+      "mp_bitcnt_bytes": 4,
+      "ulong_bytes": 4,
+      "pointer_bytes": 8,
+      "gmp_major": 6,
+      "gmp_minor": 3,
+      "gmp_patch": 0
+    }
+  },
+  "mpir": {
+    "header_sha256": "014264b1cae5efbf357562d51058d3449d2883a24ff7935a9fbdffa5f09c2c89",
+    "source_sha256": "708c73a9f8ec63f828578b41b25b375ea3a6d281831eb5760a7aaea3b76114b3",
+    "exe_sha256": "d09d993bebc51a88bb6cf86cd8b4a30ec85a993b1494fd6018a23982d2be9126",
+    "widths": {
+      "limb_bytes": 8,
+      "mp_size_bytes": 8,
+      "mp_bitcnt_bytes": 8,
+      "ulong_bytes": 4,
+      "pointer_bytes": 8,
+      "gmp_major": 6,
+      "gmp_minor": 0,
+      "gmp_patch": 0
+    }
+  }
+}

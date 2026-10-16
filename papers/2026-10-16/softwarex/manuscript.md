@@ -2,7 +2,7 @@
 
 ## Abstract
 
-We tested complete computation and decimal output of F(10^10) on a 32 GB home computer using repeated WSL2/Linux trials and a native Windows MPIR run. Two different Windows GMP DLLs failed at the last F(8 billion) square. Independent sparse-square and C probes found the same adjacent outcomes in both DLLs: 2,147,352,576 operand bits succeeded and 2,147,352,577 failed with a wrapped 64-bit allocation request. Three WSL2 outputs and one MPIR output each contain 2,089,876,403 digits and match a new direct Linux GMP reference by SHA-256. The source expression behind the wrapped request remains unlocated; the observed boundary applies to the tested builds and sparse inputs.
+We tested complete computation and decimal output of F(10^10) on a 32 GB home computer using repeated WSL2/Linux trials and native Windows MPIR. Three SHA-256-distinct Windows GMP 6.3.0 DLLs, including an independently sourced MSYS2 package, showed the same adjacent sparse-square outcomes: 2,147,352,576 operand bits succeeded and 2,147,352,577 failed with a wrapped 64-bit allocation request. Asymmetric multiplication also failed, with matched-result tests distinguishing input limb lengths from mathematical result width. Three WSL2 outputs and one MPIR output each contain 2,089,876,403 digits and match a new direct Linux GMP reference by SHA-256. The responsible source expression remains unlocated; results concern the recorded builds and host.
 
 ## Metadata
 
@@ -79,18 +79,48 @@ Linux perf_counter intervals separate arithmetic from decimal conversion and fil
 
 Each Linux result is checked modulo 1,000,000,007, 1,000,000,009, 2,147,483,647 and 10^100 by a bounded-integer fast-doubling implementation. These checks test arithmetic consistency but do not prove every digit correct. The new native reference was streamed once more: decimal digit sums gave mod 9 = 6 and mod 11 = 0, matching bounded Fibonacci residues. Cassini's identity held modulo 1,000,000,007, 1,000,000,009 and 2,147,483,647; a period-based check gave last five digits 46875 and a separate 90-digit logarithm gave first five digits 14135. The other four new payloads share the reference's SHA-256. Each complete output is counted, checked for non-digits and hashed in bounded chunks. Primary byte comparisons use the new native GMP file and the four new repair-path outputs, removing documented headers and ASCII whitespace. Retained 2024 artifacts are compared separately for the historical audit. Full agreement is a stronger artifact check than endpoints alone; shared algorithms and libraries still limit implementation independence.
 
+#### Failure observations
+
 The two native gmpy2 2.3.1 trials and two isolated gmpy2 2.2.1 trials failed at layer 32/32, the first square of a 2,776,967,654-bit operand, before decimal conversion. The preserved stderr contains GNU MP: Cannot allocate memory (size=4294597664). The current 2.3.1 trials exited with code 3 rather than the historical report's 0xC0000409. No watchdog termination was involved. Median peak working set and private commitment were 1.82 and 2.46 GiB for gmpy2 2.3.1, and 1.81 and 2.46 GiB for 2.2.1, respectively; these are distinct Windows counters. In the two gmpy2 2.3.1 runs, more than 10 GiB of physical memory remained available at the last pre-failure diagnostic. Available physical memory alone does not identify the failure; the full-width allocation trace and isolated tests below resolve the nature of the requested size.
+
+#### Full width allocation trace
 
 A separate allocator trace delegated to the original GMP allocation functions and recorded full-width size_t arguments before gmpy2 initialization. Its allocation values and log are supplied separately; traced timings are excluded from performance summaries. The largest recorded request was 18,446,744,073,709,181,984 bytes. This near-limit 64-bit size_t value has low 32 bits equal to 4,294,597,664, matching the displayed stderr size. The request equals 2^64 minus 369,632 bytes; interpreted as a signed 64-bit integer, the same bit pattern is -369,632.
 
-On 16 October 2026, protected processes squared b-bit sparse operands with only the highest bit set. Binary search recorded adjacent outcomes: b=2,147,352,576 succeeded and b=2,147,352,577 failed. The first failed input equals 2^31-2^17+1 bits; its mathematical square has 4,294,705,153 bits or 67,104,769 64-bit limbs. GMP documents 32-bit `mpz_t` size fields in limb units [13]; 67,104,769 is far below 2,147,483,647 limbs, so that generic capacity does not explain the observed boundary. The same adjacent outcomes were reproduced by direct DLL calls and by a separately compiled Visual Studio 2019 x64 C program. Its core calls are `mpz_init_set_ui(x,1); mpz_init(y); mpz_mul_2exp(x,x,b-1); mpz_mul(y,x,x);`; the complete guarded reproducer is supplied. The installed 2.3.1 binary was `C:/Users/lusun/AppData/Roaming/Python/Python313/site-packages/gmpy2.libs/libgmp-10.dll` (SHA-256 `829adcf025d22e641c6816b431fbe5b226a39b390c7205192d480151646fe9c9`). The distinct 2.2.1 wheel DLL (SHA-256 `fb2d312ca861c18e8b23648ac8440b0b613b1930ceff58f48b48ba2d3bd6b186`) had the same adjacent outcomes and a full-width failed request of 2^64-523,232 bytes. The C runs confirmed both binaries, but did not measure the internal FFT rounded length or identify a source expression. The fault is therefore in the examined DLLs' large-operand square/multiplication paths or allocation-size propagation, rather than requiring the Fibonacci recurrence, decimal conversion or Python binding. The observed wraparound supports a size-arithmetic fault; its specific expression and internal multiplication branch remain unlocated. The isolated probes, full-width traces and both DLL hashes are supplied with the supplementary evidence. The adjacent pair is an observed sparse-input transition, not a proven universal minimum; FFT rounding length remains unmeasured.
+#### Minimal reproduction and build comparison
 
-Table 2. Adjacent observed outcomes for sparse-operand squaring in the tested DLL
+In protected processes on 16 October 2026, sparse operands with only the highest bit set showed adjacent square outcomes at b=2,147,352,576 and b=2,147,352,577. Define T=2^32−2^18=4,294,705,152 bits and L=T/64=2^26−2^12=67,104,768 limbs. The successful mathematical square has T−1 bits and the failed one T+1 bits. This is an observed sparse-square transition, not a universal minimum for other operand shapes. The direct DLL test and separately compiled C reproducer use the following core operations; each case runs in its own guarded process.
 
-| Operand bits b | Result bits | 64-bit limbs | Observed result |
-| --- | --- | --- | --- |
-| 2,147,352,576 | 4,294,705,151 | 67,104,768 | Succeeded |
-| 2,147,352,577 | 4,294,705,153 | 67,104,769 | Wrapped request |
+```c
+mpz_t x, y;
+mpz_init_set_ui(x, 1);
+mpz_init(y);
+mpz_mul_2exp(x, x, b - 1);
+mpz_mul(y, x, x);
+mpz_clear(y);
+mpz_clear(x);
+```
+
+The two wheel binaries are identified as `site-packages/gmpy2.libs/libgmp-10.dll`: gmpy2 2.3.1 SHA-256 `829adcf025d22e641c6816b431fbe5b226a39b390c7205192d480151646fe9c9` and gmpy2 2.2.1 SHA-256 `fb2d312ca861c18e8b23648ac8440b0b613b1930ceff58f48b48ba2d3bd6b186`. An independent MSYS2 mingw-w64-x86_64-gmp 6.3.0-2 package [13] supplies a third DLL, `mingw64/bin/libgmp-10.dll`, SHA-256 `37248cda33845e7c5c35a574e57da762dd0a8268f0270d179f30a33746809681`. Its verified package SHA-256, CI packager, build date and GCC 13.2.0-2 build-environment record are supplied. All three reproduced the adjacent pair. At b=2,147,352,577, the 2.3.1 DLL requested 2^64−523,232 bytes; the 2.2.1 DLL requested 2^64−523,232 bytes; the MSYS2 DLL requested 2^64−523,232 bytes. These requests were captured by native C allocation callbacks forwarding to each DLL's original allocator.
+
+Table 2. Adjacent sparse-square outcomes in all three tested DLLs
+
+| Operand bits b | Result bits | Delta from T | 64-bit limbs | Observed result |
+| --- | --- | --- | --- | --- |
+| 2,147,352,576 | 4,294,705,151 | −1 | 67,104,768 | Succeeded |
+| 2,147,352,577 | 4,294,705,153 | +1 | 67,104,769 | Wrapped request |
+
+The delta column is mathematical result bits minus T. Result widths in failed cases follow from the sparse inputs; no failed result object was recovered. Limbs in this table describe the normalized mathematical result, not an observed FFT workspace length.
+
+#### Scope and mechanism tests
+
+A separate C probe compiled against the matching MSYS2 package header measured sizeof(mp_limb_t)=8, sizeof(mp_size_t)=4, sizeof(mp_bitcnt_t)=4 and sizeof(unsigned long)=4 bytes. The two wheel headers were not recovered, so their typedef widths are not established by this header probe. The inspected MPIR Win64 header instead defines 64-bit mp_size_t and mp_bitcnt_t [12]. Thus type widths differ across these builds. This makes 32-bit length or workspace arithmetic a testable hypothesis; a header width alone does not identify which internal operation produced the request. GMP's mpz_t capacity fields count limbs [14], and approximately 67 million limbs remain far below INT_MAX.
+
+Sofroniou of Wolfram Research reported a GMP 5.1.2 failure on 64-bit Linux: an int multiplication of K and l overflowed before assignment to mp_size_t, then reached allocation as a huge size_t [5]. That historical mechanism motivates checking intermediate arithmetic, rather than assigning its source expression to the present DLLs.
+
+At six sampled square widths from 2,147,352,577 through 2,147,483,648 bits, the signed interpretation of the abnormal request stayed at −523,232 bytes. At 2,776,967,654 bits it was −369,632 bytes. Both are multiples of the 8-byte limb size, corresponding arithmetically to −65,404 and −46,204 limb-sized units; this does not prove an internal variable held either negative limb count. The plateau does not support a single nonconstant affine request-versus-raw-bit formula over those samples.
+
+Distinct-address multiplication with unequal operand lengths also failed when the mathematical result had exactly T bits. A stronger matched-result test used bit-length pairs (2,147,352,513, 2,147,352,577) and (2,147,352,512, 2,147,352,578). Both mathematical products have 4,294,705,089 bits and 67,104,768 normalized limbs; their input limb sums are respectively 67,104,769 and 67,104,768. The former failed with the wrapped request and the latter succeeded in all three DLLs. These tests rule out mathematical result width or normalized result limb count as the sole trigger in these cases, and show that a square-specific path is not required. Input limb lengths and internal padding/workspace handling are therefore the next quantities to trace. Internal FFT lengths and the first overflowing expression remain unmeasured. All Windows tests used build 27766; no stable-Windows replication has been obtained.
 
 At the same Fibonacci index, WSL2 two-square completed all three trials, with median arithmetic time 48.18 s and median peak RSS 2.81 GiB. The native Windows MPIR release also completed the larger n=10^10 full-output task once; the instrumented MPIR build completed three arithmetic trials at each of n=8×10^9 and n=10^10. These observations demonstrate two usable execution paths around the observed failure. They do not constitute a patch to the original GMP binary, nor establish that all Windows GMP builds fail or that all Linux builds succeed.
 
@@ -121,7 +151,9 @@ The first five digits are 14135 and the last five 46875. The new reference is an
 
 The retained C and Python writers both use 4,000,000-digit leaves, but C calls MPIR mpz_tdiv_qr/mpz_get_str and fwrite whereas Python calls GMP f_divmod/digits and writes through a Python file object. The MPIR release also performs width correction and status reporting. Linux output was written under WSL2 /tmp and Windows output to C:. Conversion, padding, runtime I/O and storage waits were not measured separately, so the timing gap cannot be attributed to any one of them. Retained C source is not a binary-matched rebuild of the release.
 
-The sampling protocol was amended after the first MPIR full-output run revealed a much longer conversion stage. The target release run was preserved, while repetition was concentrated on five complete n=10^9 MPIR runs and three arithmetic-only trials at each of n=8×10^9 and n=10^10. The compute-only executable was rebuilt from the retained C snapshot with QueryPerformanceCounter around the unchanged Fibonacci function and an exit branch before decimal conversion. Its source, build command, library hash and executable hash are supplied separately from the release. Arithmetic medians were 107.97 s and 122.22 s at the two large indices. The single complete MPIR target run is not presented as a repeated full-output statistic. The first release run's sampler was replaced while preserving its numeric process; the protocol amendment and both memory traces are retained, and that run's wall clock uses the operating-system process creation timestamp to observed exit.
+The sampling protocol was amended after the first MPIR full-output run revealed a much longer conversion stage. The target release run was preserved, while repetition was concentrated on five complete n=10^9 MPIR runs and three arithmetic-only trials at each of n=8×10^9 and n=10^10. The compute-only executable was rebuilt from the retained C snapshot with QueryPerformanceCounter around the unchanged Fibonacci function and an exit branch before decimal conversion. Its source, build command, library hash and executable hash are supplied separately from the release. Arithmetic medians were 107.97 s and 122.22 s at the two large indices. At n=10^10, 122.22 s is about 2.15 times the WSL2 two-square median of 56.95 s; this descriptive build comparison does not isolate an operating-system effect. The single complete MPIR target run is not presented as a repeated full-output statistic. The first release run's sampler was replaced while preserving its numeric process; the protocol amendment and both memory traces are retained, and that run's wall clock uses the operating-system process creation timestamp to observed exit.
+
+Follow-up sink controls used n=10^9 and three fresh-process trials per condition, with the second round reversing condition order. The unchanged MPIR release had median process wall times 197.00 s to a C: file and 199.37 s to NUL (NUL/file=1.012). The unchanged Linux writer had median conversion-and-close times 37.90 s under WSL2 /tmp and 40.30 s under /mnt/c (/mnt/c-to-/tmp=1.063); fsync remained separate. MPIR includes arithmetic, width correction and status output, so cross-backend endpoints still differ. The stored control files matched by SHA-256; NUL produced no numeric artifact. These are within-backend sink comparisons at one billion, without a target-scale decomposition of the ten-billion timing gap.
 
 Table 4. MPIR measurements by endpoint and sample size
 
@@ -151,10 +183,9 @@ Full output agrees with direct library evaluation, and modular checks satisfy th
 
 ## Availability and declarations
 
-The software remains MIT-licensed at the pinned public Git revision [4]. Supplementary experiment drivers, raw measurements, environment files, source and binary hashes, failure diagnostics, the isolated square/direct-DLL probes of 16 October 2026, numeric verification manifests and the reference-generation command are supplied with this revision. The new full numeric outputs are retained locally and identified by file hashes; the package does not claim that a public archive or DOI already exists. Historical files retain their original provenance qualifications. Software citation follows version-specific identification [14].
+The software remains MIT-licensed at the pinned public Git revision [4]. Supplementary experiment drivers, raw measurements, environment files, source and binary hashes, failure diagnostics, the isolated square/direct-DLL probes of 16 October 2026, numeric verification manifests and the reference-generation command are supplied with this revision. The new full numeric outputs are retained locally and identified by file hashes; the package does not claim that a public archive or DOI already exists. Historical files retain their original provenance qualifications. Software citation follows version-specific identification [15].
 
 Xudong Lu, Fengjing High School Affiliated to East China Normal University, Shanghai, China, is the author and corresponding author; email: lusunrise@126.com. AI tools assisted software development, experimental orchestration and evidence processing, manuscript organization, and English editing. The author is responsible for scientific judgment, evidence verification, and the final submission text, and takes responsibility for all content in the manuscript.
-
 
 
 ## References
@@ -183,6 +214,8 @@ Xudong Lu, Fengjing High School Affiliated to East China Normal University, Shan
 
 [12] The MPIR contributors. n.d. MPIR Windows source and Win64 definitions. Inspected revision 5e0c2061af105c151970d41c8394ce956f77e455. https://github.com/BrianGladman/mpir/blob/5e0c2061af105c151970d41c8394ce956f77e455/gmp-h.in
 
-[13] The GNU MP developers. 2023f. Integer Internals. GNU MP 6.3.0 manual. https://gmplib.org/manual/Integer-Internals
+[13] MSYS2. n.d. mingw-w64-x86_64-gmp 6.3.0-2 package and build metadata. Accessed 16 October 2026. https://packages.msys2.org/packages/mingw-w64-x86_64-gmp
 
-[14] Smith AM, Katz DS, Niemeyer KE, FORCE11 Software Citation Working Group. 2016. Software citation principles. PeerJ Computer Science 2:e86. https://doi.org/10.7717/peerj-cs.86
+[14] The GNU MP developers. 2023f. Integer Internals. GNU MP 6.3.0 manual. https://gmplib.org/manual/Integer-Internals
+
+[15] Smith AM, Katz DS, Niemeyer KE, FORCE11 Software Citation Working Group. 2016. Software citation principles. PeerJ Computer Science 2:e86. https://doi.org/10.7717/peerj-cs.86

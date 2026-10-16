@@ -1,0 +1,29 @@
+{
+  "square_cases": 15,
+  "asymmetric_cases": 18,
+  "matched_result_cases": 6,
+  "guard_terminations": 0,
+  "sampled_signed_request_slopes_bytes_per_input_bit": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "25600/104914001"
+  ],
+  "single_exact_affine_function_on_samples": false,
+  "mathematical_result_width_is_sufficient_trigger": false,
+  "fft_rounded_length": null,
+  "first_overflowing_expression": null,
+  "matching_wheel_headers_available": false,
+  "msys2_header_widths": {
+    "limb_bytes": 8,
+    "mp_size_bytes": 4,
+    "mp_bitcnt_bytes": 4,
+    "ulong_bytes": 4,
+    "pointer_bytes": 8,
+    "gmp_major": 6,
+    "gmp_minor": 3,
+    "gmp_patch": 0
+  }
+}

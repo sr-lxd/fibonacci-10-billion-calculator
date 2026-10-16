@@ -2,7 +2,7 @@
 
 ## 摘要
 
-在32 GB家用电脑上，复测第100亿项斐波那契数的计算与十进制完整输出。采用既有两平方递推、分治转换和独立进程诊断。两份不同哈希的Windows GMP DLL均在第80亿项最后一次平方失败。独立稀疏数平方和C复现器记录相邻结果：2,147,352,576位成功，2,147,352,577位出现64位分配尺寸回绕。WSL2完成3次百亿项输出，Windows原生MPIR完成1次。4份输出与新生成的Linux GMP对照文件均含2,089,876,403位数字，SHA-256一致。故障证据限于所测构建与输入，具体源码表达式尚未定位。
+在32 GB家用电脑上，复测第100亿项斐波那契数的计算与十进制完整输出。采用既有两平方递推、分治转换和独立进程诊断。两份wheel所附Windows GMP DLL均在第80亿项最后一层首次平方失败。另测MSYS2来源GMP 6.3.0 DLL。三份不同哈希DLL的稀疏数平方和C复现器记录相邻结果：2,147,352,576位成功，2,147,352,577位出现64位分配尺寸回绕。WSL2完成3次百亿项输出，Windows原生MPIR完成1次。4份输出与新生成的Linux GMP对照文件均含2,089,876,403位数字，SHA-256一致。故障证据限于所测构建与输入，具体源码表达式尚未定位。
 
 关键词：斐波那契数；任意精度整数；进制转换；流式输出；可复现计算
 
@@ -12,7 +12,7 @@
 
 Computing and streaming the ten billionth Fibonacci number on a home computer
 
-This study examines a reproducible workflow for computing and writing the ten billionth Fibonacci number on a 32 GB home computer. Established two-square recurrence and bounded-leaf decimal conversion are combined with isolated execution and explicit validation. New experiments used an Intel Core i5-14400F host, Windows 11 and WSL2 Ubuntu. Four arithmetic implementations were measured five times at each of four index sizes. Native Windows Python/GMP failed reproducibly at the same final square for n=8 billion in both gmpy2 2.2.1 and 2.3.1. WSL2 completed that index in three trials. At n=10 billion, three WSL2 trials had median arithmetic and conversion-with-close times of 56.95 s and 551.98 s; the median process peak RSS was 5.10 GiB. One native Windows MPIR v1.1.0 full-output run completed with process wall time 2592.93 s and observed peak working set 8.05 GiB. All four repair-path outputs and a newly generated native Linux GMP reference contain 2,089,876,403 digits and share one SHA-256 digest. Results concern the recorded builds and host, without establishing the exact internal cause of the original allocation failure.
+We tested complete computation and decimal output of F(10^10) on a 32 GB home computer using repeated WSL2/Linux trials and native Windows MPIR. Three SHA-256-distinct Windows GMP 6.3.0 DLLs, including an independently sourced MSYS2 package, showed the same adjacent sparse-square outcomes: 2,147,352,576 operand bits succeeded and 2,147,352,577 failed with a wrapped 64-bit allocation request. Asymmetric multiplication also failed, with matched-result tests distinguishing input limb lengths from mathematical result width. Three WSL2 outputs and one MPIR output each contain 2,089,876,403 digits and match a new direct Linux GMP reference by SHA-256. The responsible source expression remains unlocated; results concern the recorded builds and host.
 
 Keywords: Fibonacci number; arbitrary precision integer; radix conversion; streaming output; reproducible computation
 
@@ -108,19 +108,49 @@ Linux采用perf_counter分开计量整数运算、十进制转换与关闭文件
 
 ### 3.2 可重复失败与执行路径对照
 
+#### 3.2.1 失败现象
+
 Windows下gmpy2 2.3.1与2.2.1各运行2次。四次均在第32层第一次平方退出，操作数长2,776,967,654位，尚未进入十进制转换。stderr均显示“GNU MP: Cannot allocate memory (size=4294597664)”。本次2.3.1退出码为3，与旧报告中的0xC0000409分开记录；均非监测器主动终止。2.3.1两次失败的观测峰值工作集和私有提交中位数分别为1.82、2.46 GiB；2.2.1两次分别为1.81、2.46 GiB，两个计数器分别记录。2.3.1两次重跑在故障前的最后一条日志显示可用物理内存仍超过10 GiB；物理内存计数本身不能解释失败，需结合全宽分配记录。
+
+#### 3.2.2 分配尺寸追踪
 
 另设分配器跟踪实验，在导入 gmpy2 前安装透传回调，以 size_t 全宽记录请求，并转交原分配函数。跟踪实验独立保存，不纳入性能统计。捕获的最大请求为18,446,744,073,709,181,984字节。该值接近64位size_t上限，其低32位为4,294,597,664，与stderr显示值相同。实际请求等于2^64−369,632字节；同一位模式按有符号64位整数解释为−369,632。约4 GiB只是低32位显示假象。
 
-2026年10月16日在受保护的独立进程中平方稀疏数x=2^(b−1)。二分记录到相邻结果：b=2,147,352,576成功，b=2,147,352,577失败。首次失败输入等于2^31−2^17+1位，平方结果按数学性质为4,294,705,153位，即67,104,769个64位limb。GMP文档中的`mpz_t`尺寸字段以limb计数[14]；67,104,769远低于2,147,483,647，故不能把这次失败解释为触及通用limb上限。绕开gmpy2直接调用DLL，并用Visual Studio 2019 x64单独编译C复现器，均得到同一对相邻结果。C核心调用依次为`mpz_init_set_ui(x,1); mpz_init(y); mpz_mul_2exp(x,x,b-1); mpz_mul(y,x,x);`，完整受保护程序随附。2.3.1所测文件为`C:/Users/lusun/AppData/Roaming/Python/Python313/site-packages/gmpy2.libs/libgmp-10.dll`，SHA-256为`829adcf025d22e641c6816b431fbe5b226a39b390c7205192d480151646fe9c9`。2.2.1的另一份DLL（SHA-256：`fb2d312ca861c18e8b23648ac8440b0b613b1930ceff58f48b48ba2d3bd6b186`）也在该点失败，完整分配请求同为2^64−523,232字节。这些结果覆盖所测两份DLL，未测得内部FFT取整长度，也未定位产生异常尺寸的源码表达式。故障由所测DLL的大整数平方/乘法路径或其分配尺寸传递触发，不依赖斐波那契递推、十进制输出或Python绑定。现有证据确认分配尺寸回绕；具体表达式和内部乘法分支仍待带符号的原生调用栈定位。独立复现器、完整分配记录和两份DLL哈希见补充材料。该相邻结果是稀疏输入的实测边界，不等于已穷举证明的全局最小失败位数；FFT取整长度未测得。
+#### 3.2.3 最小复现与构建对照
 
-表 2  所测DLL稀疏数平方的相邻实测结果
-Table 2  Adjacent observed outcomes for sparse-operand squaring in the tested DLL
+2026年10月16日在受保护的独立进程中平方稀疏数x=2^(b−1)。相邻结果为b=2,147,352,576成功、b=2,147,352,577失败。令T=2^32−2^18=4,294,705,152位，L=T/64=2^26−2^12=67,104,768个limb。成功与失败的数学平方结果分别为T−1和T+1位。这是稀疏输入平方的相邻实测结果。绕开gmpy2直接调用DLL，以及单独编译的C程序，均复现该结果。每个案例在独立受保护进程中执行，C核心调用如下。
 
-| 操作数位数 b | 结果位数 | 64位 limbs | 实测结果 |
-| --- | --- | --- | --- |
-| 2,147,352,576 | 4,294,705,151 | 67,104,768 | 成功 |
-| 2,147,352,577 | 4,294,705,153 | 67,104,769 | 分配尺寸回绕 |
+```c
+mpz_t x, y;
+mpz_init_set_ui(x, 1);
+mpz_init(y);
+mpz_mul_2exp(x, x, b - 1);
+mpz_mul(y, x, x);
+mpz_clear(y);
+mpz_clear(x);
+```
+
+两份wheel所附文件均为`site-packages/gmpy2.libs/libgmp-10.dll`。2.3.1所附DLL的SHA-256为`829adcf025d22e641c6816b431fbe5b226a39b390c7205192d480151646fe9c9`，2.2.1所附DLL为`fb2d312ca861c18e8b23648ac8440b0b613b1930ceff58f48b48ba2d3bd6b186`。另从MSYS2独立取得mingw-w64-x86_64-gmp 6.3.0-2官方包[14]，其中`mingw64/bin/libgmp-10.dll`的SHA-256为`37248cda33845e7c5c35a574e57da762dd0a8268f0270d179f30a33746809681`。已核验包哈希；CI构建者、构建日期及GCC 13.2.0-2构建环境记录随附。第三份DLL也复现上述相邻结果。b=2,147,352,577时，2.3.1所附DLL请求2^64−523,232字节；2.2.1所附DLL请求2^64−523,232字节；MSYS2 DLL请求2^64−523,232字节。三者均由C分配回调记录完整size_t，再转交各自原分配器。
+
+表 2  三份所测DLL稀疏数平方的相邻实测结果
+Table 2  Adjacent sparse-square outcomes in all three tested DLLs
+
+| 操作数位数 b | 结果位数 | 差值 | 64位 limbs | 实测结果 |
+| --- | --- | --- | --- | --- |
+| 2,147,352,576 | 4,294,705,151 | −1 | 67,104,768 | 成功 |
+| 2,147,352,577 | 4,294,705,153 | +1 | 67,104,769 | 尺寸回绕 |
+
+注：差值为数学结果位数减T。失败行的结果位数和规范化limb数由稀疏输入推得，并非读取了失败后的结果对象；表中limb数不代表已测得FFT工作区长度。
+
+#### 3.2.4 适用范围与机制检验
+
+使用MSYS2同包gmp.h编译独立C类型探针，实测mp_limb_t为8字节，mp_size_t、mp_bitcnt_t和unsigned long均为4字节。两份wheel的配套头文件尚未取得，不能把该头文件测量直接当作它们的类型证明。所核查MPIR Win64头文件则将mp_size_t和mp_bitcnt_t定义为64位[15]。这些差异支持检验32位长度或工作区计算的假设，尚未证明哪一项内部运算发生回绕。GMP的mpz_t容量字段以limb计数[16]，约6700万个limb远低于INT_MAX。
+
+Wolfram Research的Mark Sofroniou曾报告64位Linux上GMP 5.1.2的故障：K与l以int相乘，赋给mp_size_t前已溢出，随后转为巨大的size_t分配请求[6]。该记录支持检查中间表达式的计算类型，不能直接指定当前DLL的出错表达式。
+
+在2,147,352,577至2,147,483,648位之间的6个平方采样点，请求的有符号解释均为−523,232字节；2,776,967,654位时为−369,632字节。两者均为8字节limb的整数倍，算术上分别对应−65,404和−46,204个limb大小的单位，但这尚不证明某个内部变量确实保存了该负limb数。采样中的平台区间不支持以原始位数为自变量的单一非恒定线性公式。
+
+两个不同地址、不同位数的操作数相乘，数学结果恰为T位时也失败。进一步设置位数对(2,147,352,513，2,147,352,577)与(2,147,352,512，2,147,352,578)。两者数学结果均为4,294,705,089位，规范化后均占67,104,768个limb；输入limb数之和分别为67,104,769和67,104,768。前者失败，后者成功，三份DLL结果一致。这排除了单纯以数学结果位数或规范化结果limb数解释全部案例，也说明平方专用分支并非必要条件。后续应追踪输入limb长度、内部取整和工作区尺寸；FFT取整长度与首个回绕表达式仍未测得。Windows案例均来自build 27766，尚未取得稳定版Windows复现记录。
 
 在相同下标，WSL2三次完成，算术时间中位数为48.18 s，累计峰值RSS中位数为2.81 GiB。Windows MPIR发布版还完成1次更大的百亿项完整输出；计时专用构建另完成80亿、100亿项各3次纯算术重复。这些数据证明两条可行的执行路径，尚未证明原GMP内部哪个尺寸表达式存在错误，也不推广为所有Windows构建的统一结论。
 
@@ -177,6 +207,10 @@ Windows原生MPIR v1.1.0[15]一次百亿项完整输出的外部进程总时间�
 
 鉴于首轮MPIR转换耗时较长，实测期间调整后续组合：百亿项完整输出保留1次；十亿项完整输出重复5次；80亿项和100亿项纯算术各重复3次。计时专用EXE由保留的C源码构建，在原Fibonacci函数前后加入QueryPerformanceCounter，并在算术结束后提前退出；算术函数未改动。两个大规模的算术时间中位数分别为107.97 s和122.22 s。它与发布EXE分别保存源码、编译命令、静态库和二进制哈希。单次MPIR百亿项完整输出不写成重复统计。首轮计算进程保持不变，采集器中途接管；两段内存记录与协议调整说明随原始数据保留，该次外部时间采用操作系统进程创建时间至观测退出。
 
+百亿项MPIR纯算术中位数122.22 s约为WSL2两平方56.95 s的2.15倍。该比值描述所测构建，不能归因为操作系统单因素。
+
+另在第10亿项开展存储目标对照，每个条件独立运行3次，第二轮反转条件顺序。未修改的MPIR发布EXE写C:文件和NUL的进程时间中位数分别为197.00 s和199.37 s，比值为1.012。原Linux输出函数写WSL2 /tmp与/mnt/c的转换关闭阶段中位数分别为37.90 s和40.30 s，比值为1.063；fsync仍另计。MPIR计时还包括算术、位数校正和状态输出，两种后端的端点仍不同。存储文件的数字载荷SHA-256一致，NUL不产生数字文件。该对照界定十亿项下同一后端的存储目标影响，没有分解百亿项耗时差的具体组成。
+
 表 5  MPIR分口径实测结果与样本数
 Table 5  MPIR measurements by endpoint and sample size
 
@@ -196,7 +230,7 @@ Table 5  MPIR measurements by endpoint and sample size
 
 ## 数据与软件可用性
 
-源代码按MIT许可证公开，固定版本见文献[5]。本次补充实验驱动、原始CSV、逐次环境、失败日志、10月16日独立平方与直接DLL调用记录、源码与二进制哈希、数值比较清单和新对照生成命令随修订材料保存。完整大文件在本地保留并以哈希标识，尚未声称完成公开DOI归档。版本化软件引用见文献[16]。
+源代码按MIT许可证公开，固定版本见文献[5]。本次补充实验驱动、原始CSV、逐次环境、失败日志、10月16日独立平方与直接DLL调用记录、源码与二进制哈希、数值比较清单和新对照生成命令随修订材料保存。完整大文件在本地保留并以哈希标识，尚未声称完成公开DOI归档。版本化软件引用见文献[17]。
 
 ## 作者与人工智能工具说明
 
@@ -231,9 +265,10 @@ Table 5  MPIR measurements by endpoint and sample size
 
 [13] PYTHON SOFTWARE FOUNDATION. multiprocessing: Process-based parallelism. Python 3.13 documentation[EB/OL]. [2026-10-14]. https://docs.python.org/3.13/library/multiprocessing.html
 
-[14] THE GNU MP DEVELOPERS. Integer Internals: GNU MP 6.3.0[EB/OL]. (2023)[2026-10-16]. https://gmplib.org/manual/Integer-Internals
+[14] MSYS2. mingw-w64-x86_64-gmp 6.3.0-2 package and build metadata[EB/OL]. [2026-10-16]. https://packages.msys2.org/packages/mingw-w64-x86_64-gmp
 
 [15] THE MPIR CONTRIBUTORS. MPIR Windows source and Win64 definitions[EB/OL]. [2026-10-14]. https://github.com/BrianGladman/mpir/blob/5e0c2061af105c151970d41c8394ce956f77e455/gmp-h.in
 
-[16] SMITH A M, KATZ D S, NIEMEYER K E, et al. Software citation principles[J]. PeerJ Computer Science, 2016, 2: e86. https://doi.org/10.7717/peerj-cs.86
+[16] THE GNU MP DEVELOPERS. Integer Internals: GNU MP 6.3.0[EB/OL]. (2023)[2026-10-16]. https://gmplib.org/manual/Integer-Internals
 
+[17] SMITH A M, KATZ D S, NIEMEYER K E, et al. Software citation principles[J]. PeerJ Computer Science, 2016, 2: e86. https://doi.org/10.7717/peerj-cs.86

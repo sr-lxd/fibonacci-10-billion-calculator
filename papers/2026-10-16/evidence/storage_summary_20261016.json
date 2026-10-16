@@ -1,0 +1,343 @@
+{
+  "records": [
+    {
+      "label": "mpir_file",
+      "rep": 1,
+      "command": [
+        "C:\\Users\\lusun\\fibonacci-10-billion-calculator\\fib_mpir_v1.1.0.exe",
+        "1000000000",
+        "C:\\Users\\lusun\\fib_publication_work\\experiments_20261016\\followup\\storage\\mpir_file_rep1\\output.txt"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 202.72249730001204,
+      "peak_wset_bytes": 842784768,
+      "min_available_bytes": 18823999488,
+      "exe_sha256": "bda33f884b98676548124096be8e747a336330355e6c8a34acaf882cd9f50921"
+    },
+    {
+      "label": "mpir_nul",
+      "rep": 1,
+      "command": [
+        "C:\\Users\\lusun\\fibonacci-10-billion-calculator\\fib_mpir_v1.1.0.exe",
+        "1000000000",
+        "NUL"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 199.36584929999663,
+      "peak_wset_bytes": 842764288,
+      "min_available_bytes": 18959265792,
+      "exe_sha256": "bda33f884b98676548124096be8e747a336330355e6c8a34acaf882cd9f50921"
+    },
+    {
+      "label": "linux_tmp",
+      "rep": 1,
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "python3",
+        "/mnt/c/Users/lusun/fib_publication_work/benchmark_linux.py",
+        "--source",
+        "/mnt/c/Users/lusun/fib_publication_work/experiments_20261015/historical_v4_3.py",
+        "--directory",
+        "/tmp/fib_storage_followup_20261016/linux_tmp_rep1",
+        "--algorithm",
+        "two_squares",
+        "--mode",
+        "full",
+        "--n",
+        "1000000000"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 47.899292499991134,
+      "peak_wset_bytes": 9334784,
+      "min_available_bytes": 17512124416,
+      "arithmetic_s": 5.261343861999999,
+      "conversion_close_s": 37.899430987,
+      "explicit_fsync_s": 0.04425721799999849,
+      "sha256": "ee790ff513e4d66ccf5e59c355c696a323dfd968e30f63d1466fd2fdf68f270f",
+      "exe_sha256": null
+    },
+    {
+      "label": "linux_mntc",
+      "rep": 1,
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "python3",
+        "/mnt/c/Users/lusun/fib_publication_work/benchmark_linux.py",
+        "--source",
+        "/mnt/c/Users/lusun/fib_publication_work/experiments_20261015/historical_v4_3.py",
+        "--directory",
+        "/mnt/c/Users/lusun/fib_publication_work/experiments_20261016/followup/storage/linux_mntc_rep1",
+        "--algorithm",
+        "two_squares",
+        "--mode",
+        "full",
+        "--n",
+        "1000000000"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 46.88119690003805,
+      "peak_wset_bytes": 9322496,
+      "min_available_bytes": 17183981568,
+      "arithmetic_s": 4.990843667,
+      "conversion_close_s": 40.303533123,
+      "explicit_fsync_s": 0.016820781000006946,
+      "sha256": "ee790ff513e4d66ccf5e59c355c696a323dfd968e30f63d1466fd2fdf68f270f",
+      "exe_sha256": null
+    },
+    {
+      "label": "linux_mntc",
+      "rep": 2,
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "python3",
+        "/mnt/c/Users/lusun/fib_publication_work/benchmark_linux.py",
+        "--source",
+        "/mnt/c/Users/lusun/fib_publication_work/experiments_20261015/historical_v4_3.py",
+        "--directory",
+        "/mnt/c/Users/lusun/fib_publication_work/experiments_20261016/followup/storage/linux_mntc_rep2",
+        "--algorithm",
+        "two_squares",
+        "--mode",
+        "full",
+        "--n",
+        "1000000000"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 47.9784630999784,
+      "peak_wset_bytes": 9326592,
+      "min_available_bytes": 16800706560,
+      "arithmetic_s": 5.346029202999986,
+      "conversion_close_s": 40.779343127999994,
+      "explicit_fsync_s": 0.0145448330000022,
+      "sha256": "ee790ff513e4d66ccf5e59c355c696a323dfd968e30f63d1466fd2fdf68f270f",
+      "exe_sha256": null
+    },
+    {
+      "label": "linux_tmp",
+      "rep": 2,
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "python3",
+        "/mnt/c/Users/lusun/fib_publication_work/benchmark_linux.py",
+        "--source",
+        "/mnt/c/Users/lusun/fib_publication_work/experiments_20261015/historical_v4_3.py",
+        "--directory",
+        "/tmp/fib_storage_followup_20261016/linux_tmp_rep2",
+        "--algorithm",
+        "two_squares",
+        "--mode",
+        "full",
+        "--n",
+        "1000000000"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 45.67604629998095,
+      "peak_wset_bytes": 9330688,
+      "min_available_bytes": 16835522560,
+      "arithmetic_s": 5.476787411999993,
+      "conversion_close_s": 39.59691291300001,
+      "explicit_fsync_s": 0.01155663400001572,
+      "sha256": "ee790ff513e4d66ccf5e59c355c696a323dfd968e30f63d1466fd2fdf68f270f",
+      "exe_sha256": null
+    },
+    {
+      "label": "mpir_nul",
+      "rep": 2,
+      "command": [
+        "C:\\Users\\lusun\\fibonacci-10-billion-calculator\\fib_mpir_v1.1.0.exe",
+        "1000000000",
+        "NUL"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 202.43928749999031,
+      "peak_wset_bytes": 842813440,
+      "min_available_bytes": 14068998144,
+      "exe_sha256": "bda33f884b98676548124096be8e747a336330355e6c8a34acaf882cd9f50921"
+    },
+    {
+      "label": "mpir_file",
+      "rep": 2,
+      "command": [
+        "C:\\Users\\lusun\\fibonacci-10-billion-calculator\\fib_mpir_v1.1.0.exe",
+        "1000000000",
+        "C:\\Users\\lusun\\fib_publication_work\\experiments_20261016\\followup\\storage\\mpir_file_rep2\\output.txt"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 196.9980781999766,
+      "peak_wset_bytes": 842760192,
+      "min_available_bytes": 12922765312,
+      "exe_sha256": "bda33f884b98676548124096be8e747a336330355e6c8a34acaf882cd9f50921"
+    },
+    {
+      "label": "mpir_file",
+      "rep": 3,
+      "command": [
+        "C:\\Users\\lusun\\fibonacci-10-billion-calculator\\fib_mpir_v1.1.0.exe",
+        "1000000000",
+        "C:\\Users\\lusun\\fib_publication_work\\experiments_20261016\\followup\\storage\\mpir_file_rep3\\output.txt"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 193.80094310001004,
+      "peak_wset_bytes": 842776576,
+      "min_available_bytes": 16459706368,
+      "exe_sha256": "bda33f884b98676548124096be8e747a336330355e6c8a34acaf882cd9f50921"
+    },
+    {
+      "label": "mpir_nul",
+      "rep": 3,
+      "command": [
+        "C:\\Users\\lusun\\fibonacci-10-billion-calculator\\fib_mpir_v1.1.0.exe",
+        "1000000000",
+        "NUL"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 185.94285400002263,
+      "peak_wset_bytes": 842776576,
+      "min_available_bytes": 21150208000,
+      "exe_sha256": "bda33f884b98676548124096be8e747a336330355e6c8a34acaf882cd9f50921"
+    },
+    {
+      "label": "linux_tmp",
+      "rep": 3,
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "python3",
+        "/mnt/c/Users/lusun/fib_publication_work/benchmark_linux.py",
+        "--source",
+        "/mnt/c/Users/lusun/fib_publication_work/experiments_20261015/historical_v4_3.py",
+        "--directory",
+        "/tmp/fib_storage_followup_20261016/linux_tmp_rep3",
+        "--algorithm",
+        "two_squares",
+        "--mode",
+        "full",
+        "--n",
+        "1000000000"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 45.653433899977244,
+      "peak_wset_bytes": 9330688,
+      "min_available_bytes": 19945336832,
+      "arithmetic_s": 4.761052907,
+      "conversion_close_s": 36.734324911,
+      "explicit_fsync_s": 0.014150332999996351,
+      "sha256": "ee790ff513e4d66ccf5e59c355c696a323dfd968e30f63d1466fd2fdf68f270f",
+      "exe_sha256": null
+    },
+    {
+      "label": "linux_mntc",
+      "rep": 3,
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "python3",
+        "/mnt/c/Users/lusun/fib_publication_work/benchmark_linux.py",
+        "--source",
+        "/mnt/c/Users/lusun/fib_publication_work/experiments_20261015/historical_v4_3.py",
+        "--directory",
+        "/mnt/c/Users/lusun/fib_publication_work/experiments_20261016/followup/storage/linux_mntc_rep3",
+        "--algorithm",
+        "two_squares",
+        "--mode",
+        "full",
+        "--n",
+        "1000000000"
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "process_wall_s": 43.42804129997967,
+      "peak_wset_bytes": 9330688,
+      "min_available_bytes": 19924668416,
+      "arithmetic_s": 4.834654211,
+      "conversion_close_s": 36.988156171,
+      "explicit_fsync_s": 0.009670030000009433,
+      "sha256": "ee790ff513e4d66ccf5e59c355c696a323dfd968e30f63d1466fd2fdf68f270f",
+      "exe_sha256": null
+    }
+  ],
+  "groups": {
+    "mpir_file": {
+      "count": 3,
+      "process_wall_median_s": 196.9980781999766
+    },
+    "mpir_nul": {
+      "count": 3,
+      "process_wall_median_s": 199.36584929999663
+    },
+    "linux_tmp": {
+      "count": 3,
+      "process_wall_median_s": 45.67604629998095,
+      "arithmetic_s_median": 5.261343861999999,
+      "conversion_close_s_median": 37.899430987,
+      "explicit_fsync_s_median": 0.014150332999996351
+    },
+    "linux_mntc": {
+      "count": 3,
+      "process_wall_median_s": 46.88119690003805,
+      "arithmetic_s_median": 4.990843667,
+      "conversion_close_s_median": 40.303533123,
+      "explicit_fsync_s_median": 0.0145448330000022
+    }
+  },
+  "numeric_file_checks": [
+    {
+      "rep": 1,
+      "digits": 208987640,
+      "payload_sha256": "ee790ff513e4d66ccf5e59c355c696a323dfd968e30f63d1466fd2fdf68f270f"
+    },
+    {
+      "rep": 2,
+      "digits": 208987640,
+      "payload_sha256": "ee790ff513e4d66ccf5e59c355c696a323dfd968e30f63d1466fd2fdf68f270f"
+    },
+    {
+      "rep": 3,
+      "digits": 208987640,
+      "payload_sha256": "ee790ff513e4d66ccf5e59c355c696a323dfd968e30f63d1466fd2fdf68f270f"
+    }
+  ],
+  "descriptive_ratios": {
+    "mpir_nul_over_file": 1.012019259891543,
+    "linux_mntc_over_tmp_conversion": 1.0634337264014502
+  }
+}
